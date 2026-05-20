@@ -537,7 +537,7 @@ html,body{width:100vw;height:100vh;overflow:hidden;background:var(--bg);color:va
       <button class="tbtn" id="t-jj" onclick="showTab('jj')">📋 찌라시</button>
     </div>
     <div id="info-panel">
-      <div id="status-panel-loading" style="padding:20px;text-align:center;color:var(--text3)">로딩 중...</div>
+      <div class="ip-empty">💡 위 버튼을 눌러 시장 정보를 확인하세요<span>카카오 · 인스타 · 뉴스 · 찌라시의 신뢰도는 각각 다릅니다</span></div>
     </div>
   </div>
 
@@ -643,7 +643,7 @@ html,body{width:100vw;height:100vh;overflow:hidden;background:var(--bg);color:va
         📌 리딩방 사기 피해액은 매년 <span style="color:#ff4444;font-weight:700;">약 6,600억원</span> 가량에 달합니다.<br>
         모르는 링크는 절대 클릭하지 마세요.
       </div>
-      <button class="mprim" style="width:100%;background:#333;color:#aaa;cursor:not-allowed;" disabled>게임 종료</button>
+      <button class="mprim" style="width:100%;" onclick="location.reload()">🔄 처음으로 돌아가기</button>
     </div>
   </div>
 </div>
@@ -681,7 +681,7 @@ html,body{width:100vw;height:100vh;overflow:hidden;background:var(--bg);color:va
     <div id="go-detail" style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;
       padding:12px;font-size:13px;line-height:2;color:var(--text2);margin-bottom:14px;"></div>
 
-    <button class="mprim" style="width:100%;background:#333;color:#aaa;cursor:not-allowed;" disabled>게임 종료</button>
+    <button class="mprim" style="width:100%;" onclick="location.reload()">🔄 처음으로 돌아가기</button>
   </div>
 </div>
 
@@ -868,9 +868,9 @@ function genDD(){
     })
   );
   // 독립 시행: 각 날짜마다 독립적으로 확률 적용
-  const kkTrue=new Set([0,1,2,3,4,5].filter(()=>Math.random()<0.20)); // 카카오 15%
-  const igTrue=new Set([0,1,2,3,4,5].filter(()=>Math.random()<0.50)); // 인스타 10%
-  const jjTrue=new Set([0,1,2,3,4,5].slice(0,2)); // 찌라시 33%
+  const kkTrue=new Set([0,1,2,3,4,5].filter(()=>Math.random()<0.15)); // 카카오 15%
+  const igTrue=new Set([0,1,2,3,4,5].filter(()=>Math.random()<0.10)); // 인스타 10%
+  const jjTrue=new Set([0,1,2,3,4,5].slice(0,2)); // 찌라시 6일중 2일
   const srcs=shuffle(['연합뉴스','한국경제','조선비즈','서울경제','이데일리','전자신문','KBS','파이낸셜뉴스','AP통신','뉴시스','경향신문','머니투데이','한겨레','매일경제','SBS','동아일보']);
   function pickNews(){
     const cats=shuffle(['samsung','btc','oil','kakao']);
@@ -1657,7 +1657,8 @@ function buildMS(){
 function toGame(){
   showScreen('s-game');
   // DD already generated if tutorial ran; if skipped/from story, generate now
-  if(!DD){ DD=genDD(); renderCards(); updateUI(); }
+  if(!DD){ DD=genDD(); renderCards(); }
+  updateUI(); // 항상 호출 - info-panel 상태 패널 렌더 포함
   // 게임 화면이 실제로 활성화된 후 최초 1회만 scam invite 표시
   if(!G.scamInviteShown){
     G.scamInviteShown=true;
