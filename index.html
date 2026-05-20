@@ -848,9 +848,6 @@ function genDD(){
       return Math.round(sign*base*10)/10;
     })
   );
-  const jjTrue=new Set(shuffle([0,1,2,3,4,5]).slice(0,2));
-  const kkTrue=new Set(shuffle([0,1,2,3,4,5]).slice(0,1));
-  const igTrue=new Set(shuffle([0,1,2,3,4,5]).slice(0,1));
   const srcs=shuffle(['연합뉴스','한국경제','조선비즈','서울경제','이데일리','전자신문','KBS','파이낸셜뉴스','AP통신','뉴시스','경향신문','머니투데이','한겨레','매일경제','SBS','동아일보']);
   function pickNews(){
     const cats=shuffle(['samsung','btc','oil','kakao']);
@@ -864,8 +861,8 @@ function genDD(){
   const jjMsgs=shuffle(JJ_POOL);
   return DATES.map((date,i)=>({
     date,
-    kk:{msg:kkMsgs[i%kkMsgs.length],ok:kkTrue.has(i)},
-    ig:{...igItems[i%igItems.length],ok:igTrue.has(i)},
+    kk:{msg:kkMsgs[i%kkMsgs.length],ok:Math.random()<0.15},
+    ig:{...igItems[i%igItems.length],ok:Math.random()<0.10},
     nw:pickNews(),
     jj:{txt:jjMsgs[i%jjMsgs.length],ok:jjTrue.has(i)}
   }));
