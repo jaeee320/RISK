@@ -861,8 +861,8 @@ function genDD(){
   const jjMsgs=shuffle(JJ_POOL);
   return DATES.map((date,i)=>({
     date,
-    kk:{msg:kkMsgs[i%kkMsgs.length],ok:Math.random()<0.15},
-    ig:{...igItems[i%igItems.length],ok:Math.random()<0.10},
+    kk:{msg:kkMsgs[i%kkMsgs.length],ok:Math.random()<0.20},
+    ig:{...igItems[i%igItems.length],ok:Math.random()<0.50},
     nw:pickNews(),
     jj:{txt:jjMsgs[i%jjMsgs.length],ok:jjTrue.has(i)}
   }));
